@@ -11,18 +11,25 @@
 </head>
 <body>
 
-    <div class="container">
-    <div style='text-align: center;'>
-        <!-- enter your style number and size -->
+    <div class="container" style='text-align: center;'>
+        
+        <form id="barcode-form">
+            <input type="text" id="style-input" placeholder="Enter a style number" required><br><br>
+            <input type="text" id="size-input" placeholder="Enter a size" required><br><br>
+            <input type="text" id="category-input" placeholder="Enter category name" required><br><br>
+            <input type="text" id="upc-input" placeholder="Enter UPC code" required><br><br>
+            <button type="submit">Generate Barcode</button><br><br>
+        </form>
+
         <h3 id="style-size"></h3>
-        <!-- enter the category name -->
         <h5 id="category"></h5>
-        <!-- enter barcode image -->
         <span id="upc" style="font-family: 'Libre Barcode 39 Extended Text'; font-size: 35px;"></span>
-      </div>
-      </div>
+    </div>
+    
 
     <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+
    
     
 </body>
