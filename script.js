@@ -13,7 +13,7 @@ document.getElementById('barcode-form').addEventListener('submit', function(e) {
 
     // Generate Barcode
     JsBarcode("#upc", upc, {
-        format: "CODE39",
+        format: "UPC12",
         displayValue: true,
         fontSize: 50, // Increase font size for better visibility
         height: 250, // Increase height for a larger barcode
