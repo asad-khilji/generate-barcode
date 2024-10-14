@@ -15,9 +15,9 @@ document.getElementById('barcode-form').addEventListener('submit', function(e) {
     JsBarcode("#upc", upc, {
         format: "CODE39",
         displayValue: true,
-        fontSize: 40, // Increase font size for better visibility
-        height: 150, // Increase height for a larger barcode
-        width: 3,    // Adjust width for thicker bars
+        fontSize: 50, // Increase font size for better visibility
+        height: 250, // Increase height for a larger barcode
+        width: 5,    // Adjust width for thicker bars
         background: "#ffffff",
         lineColor: "#000000",
     });
