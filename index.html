@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barcode Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Extended+Text&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barcode Tag</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <div class="container">
+    <form id="barcode-form">
+      <input type="text" id="style-input" placeholder="Enter a style number" required><br><br>
+      <input type="text" id="size-input" placeholder="Enter a size" required><br><br>
+      <input type="text" id="category-input" placeholder="Enter category name" required><br><br>
+      <input type="text" id="upc-input" placeholder="Enter 11–12 digit UPC" required><br><br>
+      <button type="submit">Generate Barcode</button><br><br>
+    </form>
 
-    <div class="container" style='text-align: center;'>
-        
-        <form id="barcode-form">
-            <input type="text" id="style-input" placeholder="Enter a style number" required><br><br>
-            <input type="text" id="size-input" placeholder="Enter a size" required><br><br>
-            <input type="text" id="category-input" placeholder="Enter category name" required><br><br>
-            <input type="text" id="upc-input" placeholder="Enter UPC code" required><br><br>
-            <button type="submit">Generate Barcode</button><br><br>
-        </form>
-
+    <!-- Tag preview -->
+    <div class="tag">
+      <div class="top">
         <h3 id="style-size"></h3>
         <h5 id="category"></h5>
-        <span id="upc" style="font-family: 'Libre Barcode 39 Extended Text'; font-size: 35px;"></span>
+      </div>
+
+      <div class="barcode-box">
+        <!-- JsBarcode will draw into this SVG -->
+        <svg id="barcode"></svg>
+      </div>
+
+      <div class="color-line">
+        <span>Color</span><div class="line"></div>
+      </div>
     </div>
-    
+  </div>
 
-    <script src="./script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
-
-   
-    
+  <!-- Load JsBarcode FIRST -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <!-- Your code LAST -->
+  <script src="./script.js"></script>
 </body>
 </html>
