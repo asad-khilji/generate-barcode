@@ -8,6 +8,13 @@
 </head>
 <body>
   <div class="container">
+    <h2>Barcode Tag Generator</h2>
+
+    <select id="style-select">
+      <option value="">Select a style</option>
+    </select>
+    <br><br>
+
     <form id="barcode-form">
       <input type="text" id="style-input" placeholder="Enter a style number" required><br><br>
       <input type="text" id="size-input" placeholder="Enter a size" required><br><br>
@@ -16,7 +23,6 @@
       <button type="submit">Generate Barcode</button><br><br>
     </form>
 
-    <!-- Tag preview -->
     <div class="tag">
       <div class="top">
         <h3 id="style-size"></h3>
@@ -24,7 +30,6 @@
       </div>
 
       <div class="barcode-box">
-        <!-- JsBarcode will draw into this SVG -->
         <svg id="barcode"></svg>
       </div>
 
@@ -34,9 +39,7 @@
     </div>
   </div>
 
-  <!-- Load JsBarcode FIRST -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <!-- Your code LAST -->
   <script src="./script.js"></script>
 </body>
 </html>
