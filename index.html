@@ -32,7 +32,7 @@ document.getElementById("gen").onclick = function() {
   var upc = document.getElementById("upc").value;
   var sku = document.getElementById("sku").value;
 
-  if(upc.length !== 12 || isNaN(upc)){
+  if(upc.length !== 13 || isNaN(upc)){
     alert("Enter valid 12 digit UPC");
     return;
   }
