@@ -1,102 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Barcode Generator</title>
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 350px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 15px;
-      border: none;
-      background: #007bff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    svg {
-      margin-top: 20px;
-    }
-    .label {
-      margin-top: 10px;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Barcode Generator</title>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;padding-top:50px}
+.box{background:#fff;padding:20px;border-radius:10px;display:inline-block}
+input,button{padding:10px;margin:5px;width:250px}
+</style>
 </head>
 <body>
 
-<div class="container">
-  <h2>Barcode Generator</h2>
+<div class="box">
+<h2>Barcode Generator</h2>
 
-  <input type="text" id="upc" placeholder="Enter UPC Number">
-  <input type="text" id="sku" placeholder="Enter SKU">
+<input id="upc" placeholder="12 digit UPC">
+<input id="sku" placeholder="SKU">
 
-  <button onclick="generateBarcode()">Generate Barcode</button>
-  <button onclick="printBarcode()">Print</button>
+<br>
+<button id="gen">Generate</button>
+<button id="print">Print</button>
 
-  <svg id="barcode"></svg>
-
-  <div class="label" id="skuLabel"></div>
+<br>
+<svg id="barcode"></svg>
+<div id="skuText"></div>
 </div>
 
 <script>
-function generateBarcode() {
-  const upc = document.getElementById('upc').value;
-  const sku = document.getElementById('sku').value;
+document.getElementById("gen").onclick = function() {
+  var upc = document.getElementById("upc").value;
+  var sku = document.getElementById("sku").value;
 
-  if (!upc) {
-    alert('Please enter a UPC number');
+  if(upc.length !== 12 || isNaN(upc)){
+    alert("Enter valid 12 digit UPC");
     return;
   }
 
-  JsBarcode("#barcode", upc, {
-    format: "UPC",
-    lineColor: "#000",
-    width: 2,
-    height: 100,
-    displayValue: true
-  });
+  JsBarcode("#barcode", upc);
+  document.getElementById("skuText").innerText = "SKU: " + sku;
+};
 
-  document.getElementById('skuLabel').innerText = "SKU: " + sku;
-}
-
-function printBarcode() {
-  const printContents = document.querySelector('.container').innerHTML;
-  const win = window.open('', '', 'width=600,height=400');
-
-  win.document.write('<html><head><title>Print Barcode</title></head><body>');
-  win.document.write(printContents);
-  win.document.write('</body></html>');
-
-  win.document.close();
-  win.print();
-}
+document.getElementById("print").onclick = function(){
+  window.print();
+};
 </script>
 
 </body>
