@@ -1,45 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Barcode Tag</title>
-  <link rel="stylesheet" href="./style.css" />
+  <meta charset="UTF-8">
+  <title>Barcode Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    svg {
+      margin-top: 20px;
+    }
+    .label {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Barcode Tag Generator</h2>
 
-    <select id="style-select">
-      <option value="">Select a style</option>
-    </select>
-    <br><br>
+<div class="container">
+  <h2>Barcode Generator</h2>
 
-    <form id="barcode-form">
-      <input type="text" id="style-input" placeholder="Enter a style number" required><br><br>
-      <input type="text" id="size-input" placeholder="Enter a size" required><br><br>
-      <input type="text" id="category-input" placeholder="Enter category name" required><br><br>
-      <input type="text" id="upc-input" placeholder="Enter 11–12 digit UPC" required><br><br>
-      <button type="submit">Generate Barcode</button><br><br>
-    </form>
+  <input type="text" id="upc" placeholder="Enter UPC Number">
+  <input type="text" id="sku" placeholder="Enter SKU">
 
-    <div class="tag">
-      <div class="top">
-        <h3 id="style-size"></h3>
-        <h5 id="category"></h5>
-      </div>
+  <button onclick="generateBarcode()">Generate Barcode</button>
+  <button onclick="printBarcode()">Print</button>
 
-      <div class="barcode-box">
-        <svg id="barcode"></svg>
-      </div>
+  <svg id="barcode"></svg>
 
-      <div class="color-line">
-        <span>Color</span><div class="line"></div>
-      </div>
-    </div>
-  </div>
+  <div class="label" id="skuLabel"></div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <script src="./script.js"></script>
+<script>
+function generateBarcode() {
+  const upc = document.getElementById('upc').value;
+  const sku = document.getElementById('sku').value;
+
+  if (!upc) {
+    alert('Please enter a UPC number');
+    return;
+  }
+
+  JsBarcode("#barcode", upc, {
+    format: "UPC",
+    lineColor: "#000",
+    width: 2,
+    height: 100,
+    displayValue: true
+  });
+
+  document.getElementById('skuLabel').innerText = "SKU: " + sku;
+}
+
+function printBarcode() {
+  const printContents = document.querySelector('.container').innerHTML;
+  const win = window.open('', '', 'width=600,height=400');
+
+  win.document.write('<html><head><title>Print Barcode</title></head><body>');
+  win.document.write(printContents);
+  win.document.write('</body></html>');
+
+  win.document.close();
+  win.print();
+}
+</script>
+
 </body>
 </html>
